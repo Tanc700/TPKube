@@ -16,5 +16,12 @@ spec:
       - name: site-ecommerce
         image: site-ecommerce:latest
         imagePullPolicy: Never
+        volumeMounts:
+        - mountPath: /etc/site-ecommerce
+          name: site-ecommerce-volume
         ports:
         - containerPort: 8080
+      volumes:
+      - name: site-ecommerce-volume
+        persistentVolumeClaim:
+          claimName: site-ecommerce-pvc
