@@ -16,6 +16,27 @@ spec:
       - name: site-ecommerce
         image: site-ecommerce:latest
         imagePullPolicy: Never
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_HOST
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_USER
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_DB
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: site-ecommerce-secret
+              key: MYSQL_PASSWORD
         volumeMounts:
         - mountPath: /etc/site-ecommerce
           name: site-ecommerce-volume
